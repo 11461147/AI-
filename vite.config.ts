@@ -5,6 +5,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      // ******************************************************
+      // ** 關鍵修正：新增 base 屬性，用於 GitHub Pages 部署 **
+      // 確保資源路徑是 /AI-/
+      base: '/AI-/', 
+      // ******************************************************
       server: {
         port: 3000,
         host: '0.0.0.0',
