@@ -1,0 +1,5 @@
+{
+  "name": "AI Presentation Architect",
+  "description": "A dynamic presentation generator and viewer that turns your rough notes into structured, professional slide decks using Gemini.",
+  "requestFramePermissions": []
+}
