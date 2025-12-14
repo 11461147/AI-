@@ -38,7 +38,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 指定要發佈的資料夾，請確保與 npm run build 產生的資料夾名稱一致
-          publish_dir: ./build 
-          # 可選：如果您的簡報不是部署到預設的 gh-pages 分支，才需要修改
+          # *** 關鍵修正：將 build 改為 dist ***
+          publish_dir: ./dist 
           publish_branch: gh-pages
