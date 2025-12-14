@@ -7,6 +7,7 @@ import Controls from './components/Controls';
 const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>(AppState.INPUT);
   const [userInput, setUserInput] = useState<string>(DEFAULT_PROMPT);
+  const [apiKey, setApiKey] = useState<string>('');
   const [presentationData, setPresentationData] = useState<PresentationData | null>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [showNotes, setShowNotes] = useState(false);
@@ -39,13 +40,13 @@ const App: React.FC = () => {
   }, [appState, currentSlideIndex, presentationData]);
 
   const handleGenerate = async () => {
-    if (!userInput.trim()) return;
+    if (!userInput.trim() || !apiKey.trim()) return;
     
     setAppState(AppState.GENERATING);
     setError(null);
     
     try {
-      const data = await generatePresentationContent(userInput);
+      const data = await generatePresentationContent(userInput, apiKey);
       setPresentationData(data);
       setCurrentSlideIndex(0);
       setAppState(AppState.PRESENTING);
@@ -159,6 +160,17 @@ const App: React.FC = () => {
                     onChange={(e) => setUserInput(e.target.value)}
                     className="w-full h-64 md:h-80 bg-slate-950 text-slate-100 p-6 rounded-lg border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none text-lg leading-relaxed font-mono"
                     placeholder="Enter your presentation topic and key points here..."
+                />
+                
+                <label className="block text-sm font-semibold text-slate-300 mb-3 mt-6 uppercase tracking-wider">
+                    Gemini API Key
+                </label>
+                <input
+                    type="password"
+                    value={apiKey}
+                    onChange={(e) => setApiKey(e.target.value)}
+                    className="w-full bg-slate-950 text-slate-100 p-4 rounded-lg border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-lg"
+                    placeholder="Enter your Gemini API key..."
                 />
                 
                 {error && (

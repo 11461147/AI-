@@ -1,10 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { PresentationData } from "../types";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
-
-export const generatePresentationContent = async (userNotes: string): Promise<PresentationData> => {
+export const generatePresentationContent = async (userNotes: string, apiKey: string): Promise<PresentationData> => {
+  const ai = new GoogleGenAI({ apiKey });
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
