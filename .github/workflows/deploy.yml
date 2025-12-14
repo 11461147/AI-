@@ -41,4 +41,4 @@ jobs:
           # 指定要發佈的資料夾，請確保與 npm run build 產生的資料夾名稱一致
           publish_dir: ./build 
           # 可選：如果您的簡報不是部署到預設的 gh-pages 分支，才需要修改
-          # publish_branch: gh-pages
+          publish_branch: gh-pages
