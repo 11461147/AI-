@@ -1,0 +1,32 @@
+name: Deploy React App to GitHub Pages # 工作流名稱
+
+on:
+  push:
+    branches:
+      - main # 只有當代碼推送到 main 分支時才執行
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 虛擬機來執行工作
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4 # 檢查代碼到虛擬機
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 設定使用的 Node.js 版本
+
+      - name: Install Dependencies
+        run: npm install # 安裝 package.json 中列出的所有依賴項
+
+      - name: Build React App
+        run: npm run build # 執行建構命令，生成 build 資料夾
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # 指定要發佈的資料夾，此處是建構出的 'build'
