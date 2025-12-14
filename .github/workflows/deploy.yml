@@ -1,10 +1,20 @@
-name: Deploy React App to GitHub Pages # 工作流名稱
+name: Deploy React App to GitHub Pages 
 
 on:
   push:
     branches:
-      - main # 只有當代碼推送到 main 分支時才執行
+      - main 
 
+permissions: # <--- 請加入這個區塊
+  contents: write # 授予讀取和寫入內容的權限 (用於推送建構成果)
+  pages: write    # 授予部署到 GitHub Pages 的權限
+  id-token: write # 授予 OpenID Connect 權限 (部分部署工具需要)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest 
+
+# ... 接下來是您原來的步驟 (steps)
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 使用最新的 Ubuntu 虛擬機來執行工作
